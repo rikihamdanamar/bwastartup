@@ -12,7 +12,7 @@ import (
 
 func main() {
 
-	dsn := "root:@tcp(127.0.0.1:3306)/bwastartup?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:@tcp(127.0.0.1:3306)/bwastartup2?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
@@ -28,12 +28,7 @@ func main() {
 	api := router.Group("/api/v1")
 
 	api.POST("/users", userHandler.RegisterUser)
+	api.POST("/sessions", userHandler.Login)
+
 	router.Run()
-
-	//input	: input dari user
-	//handler : map input dari user -> struct input
-	//service : melakukan mapping dari struct input ke struct user
-	//repository
-	//db
-
 }
